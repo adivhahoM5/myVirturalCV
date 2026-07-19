@@ -2,12 +2,15 @@
 <body> 
     <title>adivhahoM5</title>
     <nav> 
-        <a href = "#me"> About Me</ahref></a>
-        <a href = "#project">Projects</a>
-        <a href = "#skills">Skills</a>
-        <a href = "#education">Education Info</a>
+      
+        <button onclick="location.hash = '#home'">About Me</button> 
+        <button onclick="location.hash = '#projects'">Projects</button> 
+        <button onclick="location.hash = '#skills'">Skills</button> 
+        <button onclick="location.hash = '#education'">Education</button> 
+        <button onclick="location.hash = '#experience'">Experience</button> 
+        
     </nav>
-
+<hr>
     <main>
         <section id = "me">
             <h2> Objective </h2>
@@ -27,8 +30,77 @@
         </section>
         <section id = "projects">
             <h2> Projects </h2>
+            <h4>Municipal Complaint Management System   </h4>
+            <p>Group project for System Analysis and Design (CMPG 223) module — achieved 94%. 
+               Developed to help municipalities manage Community Members, Services, and Complaints 
+               efficiently. </p>
+               <ul>
+                <li>Designed and implemented CRUD functionality for Community Members, Services, and 
+                  Complaints.</li>
+                <li>Built a role-based login system for Administrators and Community Members. </li>
+                <li>Developed service request tracking for water, electricity, and waste management. </li>
+                <li>Created reporting features to generate summary reports for services and complaints. </li>
+                <li>Collaborated using Git for version control and project management.</li>
+                <a href ="https://github.com/adivhahoM5/The-Municipal-Complaint-Management-System "> Link to Project</a>
+               </ul>
+            <h4>PhoneBook API (ASP.NET Core Web API) </h4>
+            <p>Individual project developed to demonstrate backend development skills using ASP.NET Core Web 
+            API, foc using on building a simple and efficient contact management system. 
+            </p>
+            <ul>
+                <li> Designed and implemented CRUD functionality for managing contacts </li>
+                <li> Developed RESTful API endpoints using controllers, routing, and HTTP methods  </li>
+                <li>Structured contact data to include names, phone numbers, and email addresses. </li>
+                <li> Tested API functionality using Postman to ensure correct request and response handling. </li>
+                <li>Applied core backend development principles to build a scalable and maintainable API.</li>
+                <a href = "https://github.com/adivhahoM5/PhoneBookAPI "> Link to Project</a>
+            </ul>
             
+        </section>
+        <section id = "education">
+            <h2>Education</h2>
+            <p> North West University</p>
+            <p> BSc in Information Technology</p>
+            <p>Relevant CourseWork:</p>
+            <p>Object Orientated Programming, System Analysis and Design ,Discrete Mathematics,<br> Data Structures 
+              and Algorithms Data Analysis, Linear Programming ,Artificial Intelligence </br>
+            </p>
+        </section>
+
+        <section id = "skills">
+         <h2>Skills</h2>
+         <h3>Technical Skills </h3>
+         <ul>
+            <li>Programming Languages: C#, C++, Java, Python, SQL, ASPX</li>
+             <li> Frameworks & Libraries: ASP.NET Core, Entity Framework Core</li>
+             <li> Databases: SQL Server (design, queries, and management) </li>
+              <li>Tools & Platforms: Visual Studio 2026, Git, Swagger, Postman </li>
+         </ul>
+         <h3>Soft Skills</h3>
+         <ul>
+            <li> Problem-solving and analytical thinking </li>
+            <li>Strong attention to detail </li>
+            <li> Teamwork and collaboration</li>
+            <li> Effective communication (written and verbal) </li>
+            <li> Time management and ability to meet deadlines </li>
+            <li> Adaptability and willingness to learn new technologies</li>
+            <li> Critical thinking and logical reasoning </li>
             
+         </ul>
+        </section>
+        <section id = "experience">
+            <h2>LEADERSHIP & INVOLVEMENT</h2>
+            <h3>Student Assistant </h3>
+            <p>North West University  </p>
+            <p>CMPG 211 –Object Oriented Programming (Java)  </p>
+            <ul>
+                <li>Facilitating communication between students and the lecturer. </li>
+                <li>Monitoring discussion forums and LMS chat to assist with queries. </li>
+                <li>Supporting students in understanding module content through peer discussion, clarification, and 
+                  additional examples. </li>
+                <li>Helping students develop digital literacy and navigate the LMS effectively.</li>
+                <li>Conduct Programming Tutorials.</li>
+            </ul>
         </section>
     </main>
 </body>
