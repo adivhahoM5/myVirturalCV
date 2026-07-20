@@ -1,10 +1,7 @@
-// ============================================================
-// Portfolio interactions & animations
-// ============================================================
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ---------- Mobile menu ----------
+// ---------- Mobile menu ---------
 function toggleMenu(){
     document.querySelector("nav").classList.toggle("active");
 }
@@ -92,20 +89,6 @@ if ('IntersectionObserver' in window){
 
     sections.forEach(sec => navObserver.observe(sec));
 }
-
-// ---------- Cursor glow (desktop, fine pointer only) ----------
-/*const cursorGlow = document.getElementById('cursorGlow');
-const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-
-if (cursorGlow && hasFinePointer && !prefersReducedMotion){
-    document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.opacity = '1';
-        cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-    });
-    document.addEventListener('mouseleave', () => {
-        cursorGlow.style.opacity = '0';
-    });
-}*/
 
 // ---------- Role text (static, no typing/erasing) ----------
 const typedRoleEl = document.getElementById('typedRole');
