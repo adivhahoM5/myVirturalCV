@@ -1,292 +1,310 @@
-<html> 
-    <head> 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>adivhahoM5</title>
         <link rel="icon" type="image/png" href="am.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
-    <script>
-function toggleMenu(){
-    document.querySelector("nav").classList.toggle("active");
-}
-</script>
 <body>
-<button class="menu-toggle" onclick="toggleMenu()">
+
+<!-- Scroll progress -->
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollProgressBar"></div></div>
+
+<!-- Cursor glow (desktop only, handled in JS) -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
     <i class="fas fa-xmark"></i>
 </button>
+
 <div class="container">
 
     <nav>
         <div class="profile">
-    <img src="MULAUDZI.png" alt="My photo" class="nav-photo">
+            <img src="MULAUDZI.png" alt="My photo" class="nav-photo">
+            <h4>Mulaudzi Adivhaho</h4>
+            <p class="profile-title">Aspiring Software Engineer</p>
+            <a href="Mulaudzi_CV.pdf" class="resume-link">
+                <i class="fas fa-file-download"></i> Resume
+            </a>
+            <hr class="profile-line">
+        </div>
 
-    <h4>Mulaudzi Adivhaho</h4>
-
-    <p class="profile-title">Aspiring Software Engineer</p>
-
-    <a href="Mulaudzi_CV.pdf"  class="resume-link">
-        <i class="fas fa-file-download"></i> Resume
-    </a>
-
-    <hr class="profile-line">
-</div>
-
-        <button onclick="location.hash='#me'">About Me</button>
-        <button onclick="location.hash='#projects'">Projects</button>
-        <button onclick="location.hash='#skills'">Skills</button>
-        <button onclick="location.hash='#education'">Education</button>
-        <button onclick="location.hash='#experience'">Experience</button>
-        <button onclick="location.hash='#contact'">Contact</button>
+        <button data-nav-link onclick="location.hash='#hero'">Home</button>
+        <button data-nav-link onclick="location.hash='#me'">About Me</button>
+        <button data-nav-link onclick="location.hash='#projects'">Projects</button>
+        <button data-nav-link onclick="location.hash='#skills'">Skills</button>
+        <button data-nav-link onclick="location.hash='#education'">Education</button>
+        <button data-nav-link onclick="location.hash='#experience'">Experience</button>
+        <button data-nav-link onclick="location.hash='#contact'">Contact</button>
         <hr>
-<p class="profile-title">Let's Connect</p>
+        <p class="profile-title">Let's Connect</p>
         <div class="social-links">
-            
-
-    <a href="https://www.linkedin.com/in/adivhahom5/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BxzCPB6SXQkO9k9J4ykrPPw%3D%3D" target="_blank">
-        <i class="fab fa-linkedin"></i> LinkedIn
-    </a>
-
-    <a href="https://www.Instagram.com/adivhahoM5" target="_blank">
-        <i class="fab fa-github"></i> GitHub
-    </a>
-<a href="https://github.com/adivhahoM5" target="_blank">
-        <i class="fab fa-instagram"></i> Instagram
-    </a>
-    
-
-</div>
+            <a href="https://www.linkedin.com/in/adivhahom5/" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://www.Instagram.com/adivhahoM5" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://github.com/adivhahoM5" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </div>
     </nav>
 
-<hr>
     <main>
-        <section id = "me">
-            <h2><i class="fa-solid fa-user"></i>ABOUT ME  </h2>
-            <span class="info-tag">
-               
-         Hi, I'm Adivhaho Mulaudzi, a final-year BSc Information Technology student
-          at North-West University with a passion for backend software development and building reliable, scalable applications.
 
-        My primary interests are C#, ASP.NET Core, RESTful API development, 
-        SQL Server, and software engineering. I enjoy solving complex problems,
-         designing efficient systems, and writing clean, maintainable code. Alongside C#, I have experience with Java, Python, C++, SQL, and ASPX, giving me a strong foundation across multiple programming languages and technologies.
-         <br>
-        <p> <br>
+        <!-- HERO -->
+        <section id="hero" class="hero">
+            <div class="hero-content reveal">
+                <p class="hero-eyebrow">// backend_developer.init()</p>
+                <h1>Hi, I'm <span class="highlight">Adivhaho Mulaudzi</span></h1>
+                <p class="hero-role"><span id="typedRole"></span><span class="type-cursor">&nbsp;</span></p>
+                <p class="hero-sub">Final-year IT student building reliable, scalable backend systems with C# and ASP.NET Core.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary" onclick="location.hash='#projects'">
+                        <i class="fa-solid fa-folder-open"></i> View Projects
+                    </a>
+                    <a href="Mulaudzi_CV.pdf" class="btn-secondary">
+                        <i class="fas fa-file-download"></i> Download Resume
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-terminal reveal">
+                <div class="terminal-window">
+                    <div class="terminal-bar">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                        <span class="terminal-title">api-console — PhoneBookAPI</span>
+                    </div>
+                    <div class="terminal-body" id="terminalBody"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="me" class="reveal">
+            <h2><i class="fa-solid fa-user"></i>ABOUT ME</h2>
+            <span class="info-tag">
+                Hi, I'm Adivhaho Mulaudzi, a final-year BSc Information Technology student
+                at North-West University with a passion for backend software development and building reliable, scalable applications.
+
+                My primary interests are C#, ASP.NET Core, RESTful API development,
+                SQL Server, and software engineering. I enjoy solving complex problems,
+                designing efficient systems, and writing clean, maintainable code. Alongside C#, I have experience with Java, Python, C++, SQL, and ASPX, giving me a strong foundation across multiple programming languages and technologies.
+                <br>
+                <p><br>
 I enjoy learning new technologies and continuously improving my skills through practical projects. My goal is to begin my career as a Software Developer, where I can contribute to meaningful solutions, grow as an engineer, and continue expanding my knowledge of backend development and modern software engineering practices.
 
 When I'm not coding, I'm usually exploring new technologies, improving my problem-solving skills, or working on personal projects that help me become a better developer.
-      </p>   </span>
+                </p>
+            </span>
         </section>
-        <section id="projects">
 
-    <h2><i class="fa-solid fa-folder-open"></i>Projects</h2>
+        <section id="projects" class="reveal">
+            <h2><i class="fa-solid fa-folder-open"></i>Projects</h2>
 
-    <div class="project-grid">
+            <div class="project-grid">
 
-        <article class="project-card">
+                <article class="project-card reveal">
+                    <h3>Municipal Complaint Management System</h3>
+                    <p>
+                        Group project for System Analysis and Design (CMPG 223) module — achieved 94%.
+                        Developed to help municipalities manage Community Members, Services, and Complaints efficiently
+                    </p>
+                    <p class="role-title">Role: System Analyst and Community Member Role Developer</p>
+                    <div class="tech-stack">
+                        <span>Project Planning according to FAST phases</span><br>
+                        <span>Updated Scope of the System</span><br>
+                        <span>Created Process Models for the System</span><br>
+                        <span>Designed and implemented CRUD functionality for Community Members, Services, and Complaints</span><br>
+                        <span>Developed service request tracking for water, electricity, and waste management.</span><br>
+                        <span>Created reporting features to generate summary reports for services and complaints</span><br>
+                        <span>Collaborated using Git for version control and project management</span><br>
+                    </div>
+                    <br>
+                    <div class="skill-card">
+                        <h4>Achievements <i class="fa-solid fa-trophy"></i></h4>
+                        <hr>
+                        <span>Designed and implemented CRUD functionality for managing contacts</span><br>
+                        <span>Developed RESTful API endpoints using controllers, routing, and HTTP methods</span><br>
+                        <span>Structured contact data to include names, phone numbers, and email addresses</span><br>
+                        <span>Tested API functionality using Postman to ensure correct request and response handling.</span><br>
+                        <span>Applied core backend development principles to build a scalable and maintainable API</span><br>
+                    </div>
 
-            <h3>Municipal Complaint Management System</h3>
+                    <a href="https://github.com/adivhahoM5/The-Municipal-Complaint-Management-System" target="_blank">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
+                </article>
 
-            <p>
-                Group project for System Analysis and Design (CMPG 223) module — achieved 94%.
-                Developed to help municipalities manage Community Members, Services, and Complaints efficiently
-            </p>
-             <p class="role-title">Role: System Analyst and Community Member Role Developer</p>
-            <div class="tech-stack">
-                <span >Project Planning according to FAST phases</span><br>
-                 <span >Updated Scope of the System</span><br>
-                <span >Created Process Models for the System</span><br>
-                <span >Designed and implemented CRUD functionality for Community Members, Services, and Complaints</span><br>
-                <span >Developed service request tracking for water, electricity, and waste management.</span><br>
-                <span >Created reporting features to generate summary reports for services and complaints</span><br>
-                <span >Collaborated using Git for version control and project management</span><br>
+                <article class="project-card reveal">
+                    <h3>PhoneBook API</h3>
+                    <p>
+                        Individual project developed to demonstrate backend development skills using ASP.NET Core WebAPI, focusing on building a simple and efficient contact management system, tested using Postman.
+                    </p>
+                    <p class="role-title">Role: Backend Developer</p>
+                    <div class="tech-stack">
+                        <span class="module">ASP.NET Core</span>
+                        <span class="module">REST API</span>
+                        <span class="module">Postman</span>
+                        <span class="module">C#</span>
+                    </div>
+                    <br>
+                    <div class="skill-card">
+                        <h4>Achievements <i class="fa-solid fa-trophy"></i></h4>
+                        <hr>
+                        <span>Designed and implemented CRUD functionality for managing contacts</span><br>
+                        <span>Developed RESTful API endpoints using controllers, routing, and HTTP methods</span><br>
+                        <span>Structured contact data to include names, phone numbers, and email addresses</span><br>
+                        <span>Tested API functionality using Postman to ensure correct request and response handling.</span><br>
+                        <span>Applied core backend development principles to build a scalable and maintainable API</span><br>
+                    </div>
+
+                    <a href="https://github.com/adivhahoM5/PhoneBookAPI" target="_blank">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
+                </article>
+
             </div>
-            <br>
-             <div class="skill-card">
-        <h4>Archivements <i class="fa-solid fa-trophy"></i> </h4>
-        <hr>
-        <span >Designed and implemented CRUD functionality for managing contacts</span><br>
-        <span >Developed RESTful API endpoints using controllers, routing, and HTTP methods</span><br>
-        <span >Structured contact data to include names, phone numbers, and email addresses</span><br>
-        <span >Tested API functionality using Postman to ensure correct request and response handling.</span><br>
-        <span >Applied core backend development principles to build a scalable and maintainable API</span><br>
-        
-      
-    </div>
+        </section>
 
-            <a href="https://github.com/adivhahoM5/The-Municipal-Complaint-Management-System" target="_blank">
-                <i class="fab fa-github"></i> View Project
-            </a>
-
-        </article>
-
-        <article class="project-card">
-
-            <h3>PhoneBook API</h3>
-            
-            <p>
-                Individual project developed to demonstrate backend development skills using ASP.NET Core Web
-API, focusing on building a simple and efficient contact management system. and tested using Postman.
-            </p>
-             <p class="role-title">Role: Backend Developer</p>
-            <div class="tech-stack">
-                <span class="module">ASP.NET Core</span>
-                <span class="module">REST API</span>
-                <span class="module">Postman</span>
-                <span class="module">C#</span>
-            </div>
-            <br>
-             <div class="skill-card">
-        <h4>Archivements <i class="fa-solid fa-trophy"></i> </h4>
-        <hr>
-        <span >Designed and implemented CRUD functionality for managing contacts</span><br>
-        <span >Developed RESTful API endpoints using controllers, routing, and HTTP methods</span><br>
-        <span >Structured contact data to include names, phone numbers, and email addresses</span><br>
-        <span >Tested API functionality using Postman to ensure correct request and response handling.</span><br>
-        <span >Applied core backend development principles to build a scalable and maintainable API</span><br>
-        
-      
-    </div>
-
-            <a href="https://github.com/adivhahoM5/PhoneBookAPI" target="_blank">
-                <i class="fab fa-github"></i> View Project
-            </a>
-
-        </article>
-
-    </div>
-
-</section>
-        <section id = "education">
+        <section id="education" class="reveal">
             <h2><i class="fa-solid fa-graduation-cap"></i>EDUCATION</h2>
             <h3>Bachelor of Science in Information Technology</h3>
-            <p> North West University (NWU)</p>
+            <p>North West University (NWU)</p>
             <span class="dark-border">Expected Graduation: November 2026</span>
-             <h5>Relevant CourseWork</h5>
-        <span class="module">Object Orientated Programming</span>
-        <span class="module">System Analysis and Design</span>
-        <span class="module">Discrete Mathematics</span>
-        <span class="module">Data Structures and Algorithms</span>
-        <br>  <br>
-        <div class="skill-card">
-       
-          <h4>Academic Foundation <i class="fa-solid fa-lightbulb"></i>
-</h4>
-         <hr>
-        <span >Software Development Principles</span> <br>
-        <span >Project Management</span> <br>
-        <span >Database Management Systems</span> <br>
-        <span >System Analysis & Design</span> <br>
-        <span >Network and Communication Technologies</span> <br>
-         
-    </div>
-            
-             
-        </section>
-
-        <section id = "skills">
-         <h2><i class="fa-solid fa-gears"></i> SKILLS</h2>
-         <h3>Technical Skills</h3>
-
-<div class="skills-grid">
-
-    <div class="skill-card">
-        <h4>Programming Languages <i class="fa-solid fa-code"></i></h4>
-        <span class="module">C#</span>
-        <span class="module"><i class="fa-brands fa-java"></i>Java</span>
-        <span class="module"><i class="fa-brands fa-python"></i>Python</span>
-        <span class="module">C++</span>
-        <span class="module"><i class="fa-solid fa-database"></i>
-SQL</span>
-        <span class="module">ASPX</span>
-    </div>
-
-    <div class="skill-card">
-        <h4>Frameworks & Tools <i class="fa-solid fa-server"></i>
-</h4>
-        <span class="module">ASP.NET Core</span>
-        <span class="module">Entity Framework Core</span>
-        <span class="module">SQL Server</span>
-        <span class="module">Git</span>
-        <span class="module">Swagger</span>
-        <span class="module">Postman</span>
-      
-    </div>
-    <div class="skill-card">
-        <h4>Database <i class="fa-solid fa-database"></i></h4>
-        <span class="module">Microsoft SQL Sever</span>
-        <span class="module">Normalizing</span>
-        <span class="module">Entity Relational Database</span>
-        <span class="module">Oracle</span>
-        
-    </div><div class="skill-card">
-        <h4>Software <i class="fa-solid fa-laptop-code"></i></h4>
-        <span class="module">Visual Studio 2026</span>
-        <span class="module">Excel</span>
-        <span class="module">Microsoft Word</span>
-        <span class="module">CodeBlocks</span>
-        <span class="module">VS Code</span>
-        <span class="module">Oracle SQL Developer</span>
-        <span class="module">Pycharm</span>
-    </div>
-
-</div>
-<br>
-  <h3>Soft Skills</h3>
-<div class="skill-card">
-       
-         <ul>
-            <li> Problem-solving and analytical thinking </li>
-            <li>Strong attention to detail </li>
-            <li> Teamwork and collaboration</li>
-            <li> Effective communication (written and verbal) </li>
-            <li> Time management and ability to meet deadlines </li>
-            <li> Adaptability and willingness to learn new technologies</li>
-            <li> Critical thinking and logical reasoning </li>
-            
-         </ul>
-        </div>
-        </section>
-        <section id = "experience">
-            <h2><i class="fa-solid fa-briefcase"></i>LEADERSHIP & INVOLVEMENT</h2>
-            <h3>Student Assistant </h3>
-            <p>North West University  </p>
-            <span class="dark-border">CMPG211- Object Orientated Program</span>
-             <div class="skill-card">
-       
-          <h4>Responsibilities  <i class="fa-solid fa-clipboard"></i></h4>
-         <hr>
-        <span >Facilitating communication between students and the lecturer.</span> <br>
-        <span >Monitoring discussion forums and LMS chat to assist with queries.</span> <br>
-        <span >Supporting students in understanding module content through peer discussion, clarification, and additional examples.</span> <br>
-        <span >Helping students develop digital literacy and navigate the LMS effectively</span> <br>
-        <span >Conduct live Programming Tutorials</span> <br>
-         
-    </div>
-        </section>
-        <section id = "contact">
-           <h2><i class="fa-solid fa-address-card"></i>
- Let's get in touch</h2> 
-           
-    <h3><i class="fa-solid fa-phone"></i>  Cell Number: +27 82 931 3550</h3>
-
-    <h3>
-        <i class="fa-solid fa-envelope"></i> Email:
-        <a href="mailto:adivhahoM5@outlook.com">
-            adivhahoM5@outlook.com
-        </a>
-    </h3>
+            <h5>Relevant CourseWork</h5>
+            <span class="module">Object Orientated Programming</span>
+            <span class="module">System Analysis and Design</span>
+            <span class="module">Discrete Mathematics</span>
+            <span class="module">Data Structures and Algorithms</span>
+            <br><br>
             <div class="skill-card">
-        <h4>Professional Availability <i class="fa-solid fa-handshake"></i></h4>
-        <hr>
-        <span >Open to new opportunities and challenges</span> <br>
-        <span >Happy to Relocate to anywhere in the World</span> <br>
-        <span >Available for consulting and collaboration</span> <br>
-        <span >Happy to discuss technical projects and solutions</span> <br>
-        <span >Interested in mentoring and knowledge sharing</span> <br>
-    </div>
+                <h4>Academic Foundation <i class="fa-solid fa-lightbulb"></i></h4>
+                <hr>
+                <span>Software Development Principles</span><br>
+                <span>Project Management</span><br>
+                <span>Database Management Systems</span><br>
+                <span>System Analysis & Design</span><br>
+                <span>Network and Communication Technologies</span><br>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <h2><i class="fa-solid fa-gears"></i> SKILLS</h2>
+            <h3>Technical Skills</h3>
+
+            <div class="skills-grid">
+
+                <div class="skill-card reveal">
+                    <h4>Programming Languages <i class="fa-solid fa-code"></i></h4>
+                    <span class="module">C#</span>
+                    <span class="module"><i class="fa-brands fa-java"></i>Java</span>
+                    <span class="module"><i class="fa-brands fa-python"></i>Python</span>
+                    <span class="module">C++</span>
+                    <span class="module"><i class="fa-solid fa-database"></i>SQL</span>
+                    <span class="module">ASPX</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <h4>Frameworks & Tools <i class="fa-solid fa-server"></i></h4>
+                    <span class="module">ASP.NET Core</span>
+                    <span class="module">Entity Framework Core</span>
+                    <span class="module">SQL Server</span>
+                    <span class="module">Git</span>
+                    <span class="module">Swagger</span>
+                    <span class="module">Postman</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <h4>Database <i class="fa-solid fa-database"></i></h4>
+                    <span class="module">Microsoft SQL Sever</span>
+                    <span class="module">Normalizing</span>
+                    <span class="module">Entity Relational Database</span>
+                    <span class="module">Oracle</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <h4>Software <i class="fa-solid fa-laptop-code"></i></h4>
+                    <span class="module">Visual Studio 2026</span>
+                    <span class="module">Excel</span>
+                    <span class="module">Microsoft Word</span>
+                    <span class="module">CodeBlocks</span>
+                    <span class="module">VS Code</span>
+                    <span class="module">Oracle SQL Developer</span>
+                    <span class="module">Pycharm</span>
+                </div>
+
+            </div>
+            <br>
+            <h3>Soft Skills</h3>
+            <div class="skill-card reveal">
+                <ul>
+                    <li>Problem-solving and analytical thinking</li>
+                    <li>Strong attention to detail</li>
+                    <li>Teamwork and collaboration</li>
+                    <li>Effective communication (written and verbal)</li>
+                    <li>Time management and ability to meet deadlines</li>
+                    <li>Adaptability and willingness to learn new technologies</li>
+                    <li>Critical thinking and logical reasoning</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="experience" class="reveal">
+            <h2><i class="fa-solid fa-briefcase"></i>LEADERSHIP & INVOLVEMENT</h2>
+            <h3>Student Assistant</h3>
+            <p>North West University</p>
+            <span class="dark-border">CMPG211 - Object Orientated Programming</span>
+            <div class="skill-card">
+                <h4>Responsibilities <i class="fa-solid fa-clipboard"></i></h4>
+                <hr>
+                <span>Facilitating communication between students and the lecturer.</span><br>
+                <span>Monitoring discussion forums and LMS chat to assist with queries.</span><br>
+                <span>Supporting students in understanding module content through peer discussion, clarification, and additional examples.</span><br>
+                <span>Helping students develop digital literacy and navigate the LMS effectively</span><br>
+                <span>Conduct live Programming Tutorials</span><br>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <h2><i class="fa-solid fa-address-card"></i> Let's get in touch</h2>
+
+            <h3><i class="fa-solid fa-phone"></i> Cell Number: +27 82 931 3550</h3>
+
+            <h3>
+                <i class="fa-solid fa-envelope"></i> Email:
+                <a href="mailto:adivhahoM5@outlook.com" id="emailLink">
+                    adivhahoM5@outlook.com
+                </a>
+                <button class="copy-btn" id="copyEmailBtn" title="Copy email">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </h3>
+
+            <div class="skill-card">
+                <h4>Professional Availability <i class="fa-solid fa-handshake"></i></h4>
+                <hr>
+                <span>Open to new opportunities and challenges</span><br>
+                <span>Happy to Relocate to anywhere in the World</span><br>
+                <span>Available for consulting and collaboration</span><br>
+                <span>Happy to discuss technical projects and solutions</span><br>
+                <span>Interested in mentoring and knowledge sharing</span><br>
+            </div>
         </section>
     </main>
 </div>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script src="script.js"></script>
 </body>
 
 </html>
