@@ -94,7 +94,7 @@ if ('IntersectionObserver' in window){
 }
 
 // ---------- Cursor glow (desktop, fine pointer only) ----------
-const cursorGlow = document.getElementById('cursorGlow');
+/*const cursorGlow = document.getElementById('cursorGlow');
 const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
 
 if (cursorGlow && hasFinePointer && !prefersReducedMotion){
@@ -105,128 +105,29 @@ if (cursorGlow && hasFinePointer && !prefersReducedMotion){
     document.addEventListener('mouseleave', () => {
         cursorGlow.style.opacity = '0';
     });
-}
+}*/
 
-// ---------- Typed role rotation ----------
-const roles = [
-    'Backend Developer',
-    'ASP.NET Core Engineer',
-    'RESTful API Builder',
-    'Problem Solver'
-];
-
+// ---------- Role text (static, no typing/erasing) ----------
 const typedRoleEl = document.getElementById('typedRole');
 
-function typeLoop(){
-    if (!typedRoleEl) return;
-
-    if (prefersReducedMotion){
-        typedRoleEl.textContent = roles[0];
-        return;
-    }
-
-    let roleIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-
-    function tick(){
-        const current = roles[roleIndex];
-
-        if (!deleting){
-            charIndex++;
-            typedRoleEl.textContent = current.slice(0, charIndex);
-            if (charIndex === current.length){
-                deleting = true;
-                setTimeout(tick, 1400);
-                return;
-            }
-            setTimeout(tick, 65);
-        } else {
-            charIndex--;
-            typedRoleEl.textContent = current.slice(0, charIndex);
-            if (charIndex === 0){
-                deleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                setTimeout(tick, 300);
-                return;
-            }
-            setTimeout(tick, 35);
-        }
-    }
-
-    tick();
+if (typedRoleEl){
+    typedRoleEl.textContent = 'Aspiring Software Developer';
 }
 
-typeLoop();
-
-// ---------- Terminal API console animation ----------
+// ---------- Terminal API console (static, fixed content) ----------
 const terminalBody = document.getElementById('terminalBody');
 
-const terminalScript = [
-    { type: 'line', text: '<span class="req">GET</span> /api/contacts', delay: 40 },
-    { type: 'pause', ms: 400 },
-    { type: 'raw', text: '\n<span class="muted">Status: 200 OK</span>\n{\n  <span class="key">"id"</span>: <span class="num">1</span>,\n  <span class="key">"name"</span>: <span class="str">"Adivhaho Mulaudzi"</span>,\n  <span class="key">"role"</span>: <span class="str">"Backend Developer"</span>,\n  <span class="key">"skills"</span>: [<span class="str">"C#"</span>, <span class="str">"ASP.NET Core"</span>, <span class="str">"SQL"</span>]\n}\n' },
-    { type: 'pause', ms: 1600 },
-    { type: 'clear' },
-    { type: 'line', text: '<span class="req">POST</span> /api/contacts', delay: 40 },
-    { type: 'pause', ms: 400 },
-    { type: 'raw', text: '\n<span class="muted">Status: 201 Created</span>\n{\n  <span class="key">"message"</span>: <span class="str">"Contact added successfully"</span>\n}\n' },
-    { type: 'pause', ms: 1600 },
-    { type: 'clear' }
-];
-
-async function runTerminal(){
-    if (!terminalBody) return;
-
-    if (prefersReducedMotion){
-        terminalBody.innerHTML = '<span class="req">GET</span> /api/contacts\n<span class="muted">Status: 200 OK</span>\n{ "name": "Adivhaho Mulaudzi", "role": "Backend Developer" }';
-        return;
-    }
-
-    while (true){
-        for (const step of terminalScript){
-            if (step.type === 'clear'){
-                terminalBody.innerHTML = '';
-            } else if (step.type === 'raw'){
-                terminalBody.innerHTML += step.text;
-            } else if (step.type === 'line'){
-                await typeHTMLLine(terminalBody, step.text, step.delay);
-            } else if (step.type === 'pause'){
-                await sleep(step.ms);
-            }
-        }
-    }
+if (terminalBody){
+    terminalBody.innerHTML =
+        '<span class="req">GET</span> /api/contacts\n' +
+        '<span class="muted">Status: 200 OK</span>\n' +
+        '{\n' +
+        '  <span class="key">"id"</span>: <span class="num">1</span>,\n' +
+        '  <span class="key">"name"</span>: <span class="str">"Adivhaho Mulaudzi"</span>,\n' +
+        '  <span class="key">"role"</span>: <span class="str">"Software Developer"</span>,\n' +
+        '  <span class="key">"skills"</span>: [<span class="str">"C#"</span>, <span class="str">"ASP.NET Core"</span>, <span class="str">"SQL"</span>]\n' +
+        '}';
 }
-
-function typeHTMLLine(container, html, delay){
-    return new Promise(resolve => {
-        // Type visible text char-by-char while preserving span wrapper
-        const temp = document.createElement('div');
-        temp.innerHTML = html;
-        const fullText = temp.textContent;
-        let i = 0;
-        const lineSpan = document.createElement('div');
-        container.appendChild(lineSpan);
-
-        function step(){
-            i++;
-            lineSpan.textContent = '$ ' + fullText.slice(0, i);
-            if (i < fullText.length){
-                setTimeout(step, delay);
-            } else {
-                lineSpan.innerHTML = '$ ' + html;
-                resolve();
-            }
-        }
-        step();
-    });
-}
-
-function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-runTerminal();
 
 // ---------- Copy email ----------
 const copyEmailBtn = document.getElementById('copyEmailBtn');

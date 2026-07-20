@@ -38,7 +38,7 @@ body{
 .scroll-progress-bar{
     height:100%;
     width:0%;
-    background:linear-gradient(90deg,#60a5fa,#34d399);
+    background:linear-gradient(90deg,#60a5fa,#162950);
     transition:width .1s ease-out;
 }
 
@@ -186,7 +186,7 @@ section{
     background:rgba(255,255,255,.05);
     backdrop-filter:blur(20px);
     border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
+    border-radius:0px;
     padding:30px;
     margin-bottom:30px;
     box-shadow:0 12px 35px rgba(0,0,0,.3);
@@ -247,7 +247,7 @@ article{
 }
 
 .hero-content .highlight{
-    background:linear-gradient(90deg,#60a5fa,#34d399);
+    background:linear-gradient(90deg,#60a5fa,#a1c3ee);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
