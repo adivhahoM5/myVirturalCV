@@ -1,304 +1,493 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>adivhahoM5</title>
-        <link rel="icon" type="image/png" href="am.png">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    </head>
-<body>
+!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adivhaho Mulaudzi — Final-year BSc Information Technology student at North-West University. Aspiring Software Engineer.">
+  <meta name="theme-color" content="#0D1117">
+  <title>Adivhaho Mulaudzi — Software Engineer</title>
+  <link rel="icon" type="image/png" href="am.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gh: {
+              bg: '#0D1117',
+              surface: '#161B22',
+              border: '#30363D',
+              muted: '#8B949E',
+              text: '#C9D1D9',
+              bright: '#F0F6FC',
+              purple: '#A371F7',
+              'purple-dim': 'rgba(163, 113, 247, 0.14)',
+              'purple-hover': '#B794F6',
+            }
+          },
+          fontFamily: {
+            sans: ['Instrument Sans', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: {
+            'glow': '0 0 40px rgba(163, 113, 247, 0.35)',
+            'card': '0 12px 40px rgba(0, 0, 0, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gh-bg text-gh-text font-sans antialiased overflow-x-hidden">
+  <div class="noise" aria-hidden="true"></div>
+  <div class="fixed top-0 left-0 right-0 h-0.5 z-[1100]" aria-hidden="true">
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-[#8957E5] to-gh-purple shadow-[0_0_8px_rgba(163,113,247,0.35)]" style="width:0%"></div>
+  </div>
 
-<!-- Scroll progress -->
-<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollProgressBar"></div></div>
+  <!-- Header -->
+  <header id="header" class="fixed top-0 left-0 right-0 h-[4.25rem] z-[100] bg-[#0D1117]/82 backdrop-blur-md border-b border-transparent transition-all duration-300">
+    <div class="max-w-5xl mx-auto h-full px-5 sm:px-8 flex items-center justify-between gap-6">
+      <a href="#top" class="font-bold text-lg text-gh-bright tracking-tight hover:text-gh-purple transition-colors">AM.</a>
+      <nav class="hidden md:flex items-center gap-7" aria-label="Primary">
+        <a href="#about" class="text-sm font-medium text-gh-muted hover:text-gh-bright transition-colors">About</a>
+        <a href="#work" class="text-sm font-medium text-gh-muted hover:text-gh-bright transition-colors">Projects</a>
+        <a href="#skills" class="text-sm font-medium text-gh-muted hover:text-gh-bright transition-colors">Skills</a>
+        <a href="#education" class="text-sm font-medium text-gh-muted hover:text-gh-bright transition-colors">Education</a>
+        <a href="#leadership" class="text-sm font-medium text-gh-muted hover:text-gh-bright transition-colors">Leadership</a>
+        <a href="#contact" class="text-sm font-medium text-gh-muted hover:text-gh-bright transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="Adivhaho_CV.pdf" download class="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-gh-bg bg-gh-bright hover:bg-gh-purple px-4 py-2 rounded-full transition-all hover:-translate-y-0.5">
+          <i class="fas fa-file-download text-xs"></i> Resume
+        </a>
+        <button id="menuToggle" class="md:hidden w-7 h-5 relative" aria-label="Open menu" aria-expanded="false">
+          <span class="absolute left-0 right-0 h-[1.5px] bg-gh-bright top-1 transition-all"></span>
+          <span class="absolute left-0 right-0 h-[1.5px] bg-gh-bright bottom-1 transition-all"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-<!-- Cursor glow (desktop only, handled in JS) -->
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-
-<button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
-    <i class="fas fa-xmark"></i>
-</button>
-
-<div class="container">
-
-    <nav>
-        <div class="profile">
-            <img src="MULAUDZI.png" alt="My photo" class="nav-photo">
-            <h4>Mulaudzi Adivhaho</h4>
-            <p class="profile-title">Aspiring Software Engineer</p>
-            
-            <hr class="profile-line">
-        </div>
-
-        <button data-nav-link onclick="location.hash='#hero'">Home</button>
-        <button data-nav-link onclick="location.hash='#me'">About Me</button>
-        <button data-nav-link onclick="location.hash='#projects'">Projects</button>
-        <button data-nav-link onclick="location.hash='#skills'">Skills</button>
-        <button data-nav-link onclick="location.hash='#education'">Education</button>
-        <button data-nav-link onclick="location.hash='#experience'">Experience</button>
-        <button data-nav-link onclick="location.hash='#contact'">Contact</button>
-        <hr>
-       
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/adivhahom5/" target="_blank">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-           
-            <a href="https://github.com/adivhahoM5" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-        </div>
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="fixed inset-x-0 top-[4.25rem] bottom-0 bg-gh-bg z-[90] px-5 py-10 hidden" hidden>
+    <nav class="flex flex-col gap-6">
+      <a href="#about" class="text-xl font-medium text-gh-bright hover:text-gh-purple">About</a>
+      <a href="#work" class="text-xl font-medium text-gh-bright hover:text-gh-purple">Projects</a>
+      <a href="#skills" class="text-xl font-medium text-gh-bright hover:text-gh-purple">Skills</a>
+      <a href="#education" class="text-xl font-medium text-gh-bright hover:text-gh-purple">Education</a>
+      <a href="#leadership" class="text-xl font-medium text-gh-bright hover:text-gh-purple">Leadership</a>
+      <a href="#contact" class="text-xl font-medium text-gh-bright hover:text-gh-purple">Contact</a>
+      <a href="Adivhaho_CV.pdf" download class="mt-4 text-base text-gh-purple font-medium">
+        <i class="fas fa-file-download"></i> Download Resume
+      </a>
     </nav>
+  </div>
 
-    <main>
-
-        <!-- HERO -->
-        <section id="hero" class="hero">
-            <div class="hero-content reveal">
-                <p class="hero-eyebrow">// Console.Wrieline(Welcome to my Virtural CV)</p>
-                <h1>Hi, I'm <span class="highlight">Adivhaho Mulaudzi</span></h1>
-                <p class="hero-role"><span id="typedRole"></span></p>
-                <p class="hero-sub">Final BSc in  Information Technology  Student .</p>
-                <div class="hero-cta">
-                    
-                    <a href="Adivhaho_CV.pdf" class="btn-secondary">
-                        <i class="fas fa-file-download"></i> Download Resume
-                    </a>
-                </div>
+  <main id="top">
+    <!-- Hero -->
+    <section class="min-h-screen flex items-center max-w-5xl mx-auto px-5 sm:px-8 pt-24 pb-16">
+      <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-14 items-center w-full">
+        <div class="order-2 lg:order-1 text-center lg:text-left">
+          <p class="font-mono text-xs text-gh-purple tracking-wide mb-5">Available for opportunities </p>
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-gh-bright tracking-tight leading-[1.1] mb-3">
+            Adivhaho Mulaudzi
+          </h1>
+          <p class="text-xl font-medium text-gh-text mb-4">
+            Aspiring <span class="text-gh-purple">Software Engineer</span>
+          </p>
+          <p class="text-gh-muted max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed">
+            Final-year BSc Information Technology student at North-West University.
+            I design and build reliable systems ,from clean APIs and databases to full applications that solve real problems.
+          </p>
+          <div class="flex flex-wrap gap-3 justify-center lg:justify-start mb-10">
+            <a href="#work" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gh-purple text-gh-bg font-semibold text-sm hover:bg-gh-purple-hover hover:-translate-y-0.5 hover:shadow-glow transition-all">
+              View projects
+            </a>
+            <a href="Adivhaho_CV.pdf" download class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-gh-border text-gh-bright font-semibold text-sm hover:bg-gh-surface hover:border-gh-muted transition-all">
+              <i class="fas fa-file-download"></i> Download resume
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-gh-border/60 max-w-sm mx-auto lg:mx-0 lg:max-w-none text-left">
+            <div>
+              <span class="block text-[0.7rem] uppercase tracking-wider text-gh-muted font-medium mb-1">Location</span>
+              <span class="text-sm font-medium text-gh-text">South Africa · Open to relocate</span>
             </div>
-
-            <div class="hero-terminal reveal">
-                <div class="terminal-window">
-                    <div class="terminal-bar">
-                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                        <span class="terminal-title">api-console — PhoneBookAPI</span>
-                    </div>
-                    <div class="terminal-body" id="terminalBody"></div>
-                </div>
+            <div>
+              <span class="block text-[0.7rem] uppercase tracking-wider text-gh-muted font-medium mb-1">Focus</span>
+              <span class="text-sm font-medium text-gh-text">Software Engineering</span>
             </div>
-        </section>
-
-        <section id="me" class="reveal">
-            <h2><i class="fa-solid fa-user"></i>ABOUT ME</h2>
-            <span class="info-tag">
-                Hi, I'm Adivhaho Mulaudzi, a final-year BSc Information Technology student
-                at North-West University with a passion for software development and building reliable, scalable applications.
-
-                My primary interests are C#, ASP.NET Core, RESTful API development,
-                SQL Server, and software engineering. I enjoy solving complex problems,
-                designing efficient systems, and writing clean, maintainable code. Alongside C#, I have experience with Java, Python, C++, SQL, and ASPX, giving me a strong foundation across multiple programming languages and technologies.
-                <br>
-                <p><br>
-I enjoy learning new technologies and continuously improving my skills through practical projects. My goal is to begin my career as a Software Developer, where I can contribute to meaningful solutions, grow as an engineer, and continue expanding my knowledge of backend development and modern software engineering practices.
-
-When I'm not coding, I'm usually exploring new technologies, improving my problem-solving skills, or working on personal projects that help me become a better developer.
-                </p>
-            </span>
-        </section>
-
-        <section id="projects" class="reveal">
-            <h2><i class="fa-solid fa-folder-open"></i>Projects</h2>
-
-            <div class="project-grid">
-
-                <article class="project-card reveal">
-                    <h3>Municipal Complaint Management System</h3>
-                    <p>
-                        Group project for System Analysis and Design (CMPG 223) module — achieved 94%.
-                        Developed to help municipalities manage Community Members, Services, and Complaints efficiently
-                    </p>
-                    <p class="role-title">Role: System Analyst and Community Member Role Developer</p>
-                    <div class="tech-stack">
-                        <span>Project Planning according to FAST phases</span><br>
-                        <span>Updated Scope of the System</span><br>
-                        <span>Created Process Models for the System</span><br>
-                        <span>Designed and implemented CRUD functionality for Community Members, Services, and Complaints</span><br>
-                        <span>Developed service request tracking for water, electricity, and waste management.</span><br>
-                        <span>Created reporting features to generate summary reports for services and complaints</span><br>
-                        <span>Collaborated using Git for version control and project management</span><br>
-                    </div>
-                    <br>
-                    <div class="skill-card">
-                        <h4>Achievements <i class="fa-solid fa-trophy"></i></h4>
-                        <hr>
-                        <span>Designed and implemented CRUD functionality for managing contacts</span><br>
-                        <span>Developed RESTful API endpoints using controllers, routing, and HTTP methods</span><br>
-                        <span>Structured contact data to include names, phone numbers, and email addresses</span><br>
-                        <span>Tested API functionality using Postman to ensure correct request and response handling.</span><br>
-                        <span>Applied core backend development principles to build a scalable and maintainable API</span><br>
-                    </div>
-
-                    <a href="https://github.com/adivhahoM5/The-Municipal-Complaint-Management-System" target="_blank">
-                        <i class="fab fa-github"></i> View Project
-                    </a>
-                </article>
-
-                <article class="project-card reveal">
-                    <h3>PhoneBook API</h3>
-                    <p>
-                        Individual project developed to demonstrate backend development skills using ASP.NET Core WebAPI, focusing on building a simple and efficient contact management system, tested using Postman.
-                    </p>
-                    <p class="role-title">Role: Backend Developer</p>
-                    <div class="tech-stack">
-                        <span class="module">ASP.NET Core</span>
-                        <span class="module">REST API</span>
-                        <span class="module">Postman</span>
-                        <span class="module">C#</span>
-                    </div>
-                    <br>
-                    <div class="skill-card">
-                        <h4>Achievements <i class="fa-solid fa-trophy"></i></h4>
-                        <hr>
-                        <span>Designed and implemented CRUD functionality for managing contacts</span><br>
-                        <span>Developed RESTful API endpoints using controllers, routing, and HTTP methods</span><br>
-                        <span>Structured contact data to include names, phone numbers, and email addresses</span><br>
-                        <span>Tested API functionality using Postman to ensure correct request and response handling.</span><br>
-                        <span>Applied core backend development principles to build a scalable and maintainable API</span><br>
-                    </div>
-
-                    <a href="https://github.com/adivhahoM5/PhoneBookAPI" target="_blank">
-                        <i class="fab fa-github"></i> View Project
-                    </a>
-                </article>
-
+            <div>
+              <span class="block text-[0.7rem] uppercase tracking-wider text-gh-muted font-medium mb-1">Graduation</span>
+              <span class="text-sm font-medium text-gh-text">November 2026</span>
             </div>
-        </section>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2 flex justify-center">
+          <div class="relative w-48 sm:w-56 lg:w-[280px] aspect-square rounded-full p-[5px] bg-gradient-to-br from-gh-purple via-[#6E40C9] to-gh-border shadow-glow">
+            <img src="toon A.jpeg" alt="Adivhaho Mulaudzi" class="w-full h-full object-cover rounded-full bg-gh-surface" width="280" height="280">
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="education" class="reveal">
-            <h2><i class="fa-solid fa-graduation-cap"></i>EDUCATION</h2>
-            <h3>Bachelor of Science in Information Technology</h3>
-            <p>North West University (NWU)</p>
-            <span class="dark-border">Expected Graduation: November 2026</span>
-            <h5>Relevant CourseWork</h5>
-            <span class="module">Object Orientated Programming</span>
-            <span class="module">System Analysis and Design</span>
-            <span class="module">Discrete Mathematics</span>
-            <span class="module">Data Structures and Algorithms</span>
-            <br><br>
-            <div class="skill-card">
-                <h4>Academic Foundation <i class="fa-solid fa-lightbulb"></i></h4>
-                <hr>
-                <span>Software Development Principles</span><br>
-                <span>Project Management</span><br>
-                <span>Database Management Systems</span><br>
-                <span>System Analysis & Design</span><br>
-                <span>Network and Communication Technologies</span><br>
+    <!-- About -->
+    <section id="about" class="max-w-5xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <h2 class="text-2xl sm:text-[1.85rem] font-bold text-gh-bright tracking-tight flex items-center gap-2.5 mb-8">
+        <i class="fas fa-user text-gh-purple text-[0.9em]"></i> About
+      </h2>
+      <div class="grid lg:grid-cols-[1.55fr_1fr] gap-8 lg:gap-12">
+        <div class="space-y-4">
+          <p class="text-lg sm:text-xl font-medium text-gh-bright leading-snug">
+            I’m a final-year software engineering student who cares about building systems that are reliable, maintainable, and useful.
+          </p>
+          <p>
+            I work across the stack — designing data models, writing backend services, building clean interfaces, and shipping complete applications. My strongest experience is with <strong class="text-gh-bright font-medium">C#</strong>, <strong class="text-gh-bright font-medium">ASP.NET Core</strong>, <strong class="text-gh-bright font-medium">Python</strong>, <strong class="text-gh-bright font-medium">JavaScript</strong> and SQL Server, but I’m comfortable picking up new languages and tools when the problem demands it.
+          </p>
+          <p>
+            I enjoy solving complex problems, designing efficient systems, and writing code that other developers can understand and extend. My goal is to grow as a software engineer — contributing to meaningful products and taking ownership of systems that scale.
+          </p>
+        </div>
+        <div class="bg-gh-surface border border-gh-border/50 rounded-2xl p-6 h-fit">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-gh-muted mb-4">Currently</h3>
+          <ul class="space-y-3 text-sm">
+            <li class="text-gh-text">Finishing BSc IT at North-West University</li>
+            <li class="text-gh-text">Building full-stack and backend projects</li>
+            <li class="text-gh-text">Open to full-time roles &amp; internships</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="work" class="max-w-5xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <h2 class="text-2xl sm:text-[1.85rem] font-bold text-gh-bright tracking-tight flex items-center gap-2.5 mb-8">
+        <i class="fas fa-folder-open text-gh-purple text-[0.9em]"></i> Projects
+      </h2>
+
+      <div class="space-y-5">
+        <!-- Project 1 -->
+        <article class="bg-gh-surface border border-gh-border/50 rounded-2xl overflow-hidden hover:border-gh-border hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+          <div class="p-6 sm:p-8 pb-4">
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Group project</span>
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">System Analysis</span>
+              <span class="font-mono text-[0.7rem] font-medium text-gh-purple bg-gh-purple-dim px-2.5 py-1 rounded-md">94%</span>
             </div>
-        </section>
-
-        <section id="skills" class="reveal">
-            <h2><i class="fa-solid fa-gears"></i> SKILLS</h2>
-            <h3>Technical Skills</h3>
-
-            <div class="skills-grid">
-
-                <div class="skill-card reveal">
-                    <h4>Programming Languages <i class="fa-solid fa-code"></i></h4>
-                    <span class="module">C#</span>
-                    <span class="module"><i class="fa-brands fa-java"></i>Java</span>
-                    <span class="module"><i class="fa-brands fa-python"></i>Python</span>
-                    <span class="module">C++</span>
-                    <span class="module"><i class="fa-solid fa-database"></i>SQL</span>
-                    <span class="module">ASPX</span>
-                </div>
-
-                <div class="skill-card reveal">
-                    <h4>Frameworks & Tools <i class="fa-solid fa-server"></i></h4>
-                    <span class="module">ASP.NET Core</span>
-                    <span class="module">Entity Framework Core</span>
-                    <span class="module">SQL Server</span>
-                    <span class="module">Git</span>
-                    <span class="module">Swagger</span>
-                    <span class="module">Postman</span>
-                </div>
-
-                <div class="skill-card reveal">
-                    <h4>Database <i class="fa-solid fa-database"></i></h4>
-                    <span class="module">Microsoft SQL Sever</span>
-                    <span class="module">Normalizing</span>
-                    <span class="module">Entity Relational Database</span>
-                    <span class="module">Oracle</span>
-                </div>
-
-                <div class="skill-card reveal">
-                    <h4>Software <i class="fa-solid fa-laptop-code"></i></h4>
-                    <span class="module">Visual Studio 2026</span>
-                    <span class="module">Excel</span>
-                    <span class="module">Microsoft Word</span>
-                    <span class="module">CodeBlocks</span>
-                    <span class="module">VS Code</span>
-                    <span class="module">Oracle SQL Developer</span>
-                    <span class="module">Pycharm</span>
-                </div>
-
+            <h3 class="text-xl font-bold text-gh-bright tracking-tight mb-1">Municipal Complaint Management System</h3>
+            <p class="text-sm text-gh-purple font-medium mb-3">Role: System Analyst &amp; Community Member module developer</p>
+            <p class="text-gh-text text-[0.95rem] mb-5">
+              A system that helps municipalities manage community members, services and complaints. Built for CMPG 223 (System Analysis and Design).
+            </p>
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-gh-muted mb-3 flex items-center gap-2">
+              <i class="fas fa-list-check text-gh-purple"></i> What I did
+            </h4>
+            <ul class="space-y-2 mb-5 text-[0.95rem]">
+              <li class="text-gh-text">Led project planning according to FAST phases and updated the system scope</li>
+              <li class="text-gh-text">Created process models for the full system</li>
+              <li class="text-gh-text">Designed and implemented CRUD for Community Members, Services and Complaints</li>
+              <li class="text-gh-text">Built service-request tracking for water, electricity and waste management</li>
+              <li class="text-gh-text">Developed reporting features for services and complaints summaries</li>
+              <li class="text-gh-text">Collaborated with the team using Git for version control</li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">System design</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">CRUD</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Git</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Reporting</span>
             </div>
-            <br>
-            <h3>Soft Skills</h3>
-            <div class="skill-card reveal">
-                <ul>
-                    <li>Problem-solving and analytical thinking</li>
-                    <li>Strong attention to detail</li>
-                    <li>Teamwork and collaboration</li>
-                    <li>Effective communication (written and verbal)</li>
-                    <li>Time management and ability to meet deadlines</li>
-                    <li>Adaptability and willingness to learn new technologies</li>
-                    <li>Critical thinking and logical reasoning</li>
-                </ul>
+          </div>
+          <div class="px-6 sm:px-8 py-4 border-t border-gh-border/50">
+            <a href="https://github.com/adivhahoM5/The-Municipal-Complaint-Management-System" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-gh-purple hover:text-gh-purple-hover hover:gap-3 transition-all">
+              <i class="fab fa-github"></i> View repository
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="bg-gh-surface border border-gh-border/50 rounded-2xl overflow-hidden hover:border-gh-border hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+          <div class="p-6 sm:p-8 pb-4">
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Individual</span>
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Backend</span>
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">ASP.NET Core</span>
             </div>
-        </section>
-
-        <section id="experience" class="reveal">
-            <h2><i class="fa-solid fa-briefcase"></i>LEADERSHIP & INVOLVEMENT</h2>
-            <h3>Student Assistant</h3>
-            <p>North West University</p>
-            <span class="dark-border">CMPG211 - Object Orientated Programming</span>
-            <div class="skill-card">
-                <h4>Responsibilities <i class="fa-solid fa-clipboard"></i></h4>
-                <hr>
-                <span>Facilitating communication between students and the lecturer.</span><br>
-                <span>Monitoring discussion forums and LMS chat to assist with queries.</span><br>
-                <span>Supporting students in understanding module content through peer discussion, clarification, and additional examples.</span><br>
-                <span>Helping students develop digital literacy and navigate the LMS effectively</span><br>
-                <span>Conduct live Programming Tutorials</span><br>
+            <h3 class="text-xl font-bold text-gh-bright tracking-tight mb-1">PhoneBook API</h3>
+            <p class="text-sm text-gh-purple font-medium mb-3">Role: Backend Developer</p>
+            <p class="text-gh-text text-[0.95rem] mb-5">
+              A contact-management REST API built with ASP.NET Core WebAPI, focused on clean architecture and maintainable backend design.
+            </p>
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-gh-muted mb-3 flex items-center gap-2">
+              <i class="fas fa-list-check text-gh-purple"></i> What I achieved
+            </h4>
+            <ul class="space-y-2 mb-5 text-[0.95rem]">
+              <li class="text-gh-text">Designed and implemented full CRUD for managing contacts</li>
+              <li class="text-gh-text">Built RESTful endpoints with controllers, routing and HTTP methods</li>
+              <li class="text-gh-text">Structured contact data (names, phone numbers, email addresses)</li>
+              <li class="text-gh-text">Tested the API thoroughly with Postman for correct request/response handling</li>
+              <li class="text-gh-text">Applied backend principles for a scalable, maintainable API</li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">C#</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">ASP.NET Core</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">REST</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Postman</span>
             </div>
-        </section>
+          </div>
+          <div class="px-6 sm:px-8 py-4 border-t border-gh-border/50">
+            <a href="https://github.com/adivhahoM5/PhoneBookAPI" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-gh-purple hover:text-gh-purple-hover hover:gap-3 transition-all">
+              <i class="fab fa-github"></i> View repository
+            </a>
+          </div>
+        </article>
 
-        <section id="contact" class="reveal">
-            <h2><i class="fa-solid fa-address-card"></i> Let's get in touch</h2>
-
-            <h3><i class="fa-solid fa-phone"></i> Cell Number: +27 82 931 3550</h3>
-
-            <h3>
-                <i class="fa-solid fa-envelope"></i> Email:
-                <a href="mailto:adivhahoM5@outlook.com" id="emailLink">
-                    adivhahoM5@outlook.com
-                </a>
-                <button class="copy-btn" id="copyEmailBtn" title="Copy email">
-                    <i class="fa-regular fa-copy"></i>
-                </button>
-            </h3>
-
-            <div class="skill-card">
-                <h4>Professional Availability <i class="fa-solid fa-handshake"></i></h4>
-                <hr>
-                <span>Open to new opportunities and challenges</span><br>
-                <span>Happy to Relocate to anywhere in the World</span><br>
-                <span>Available for consulting and collaboration</span><br>
-                <span>Happy to discuss technical projects and solutions</span><br>
-                <span>Interested in mentoring and knowledge sharing</span><br>
+        <!-- Project 3 -->
+        <article class="bg-gh-surface border border-gh-border/50 rounded-2xl overflow-hidden hover:border-gh-border hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+          <div class="p-6 sm:p-8 pb-4">
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Full-stack</span>
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Personal project</span>
+              <span class="font-mono text-[0.7rem] font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">FastAPI</span>
             </div>
-        </section>
-    </main>
-</div>
+            <h3 class="text-xl font-bold text-gh-bright tracking-tight mb-1">Financial Tracker</h3>
+            <p class="text-sm text-gh-purple font-medium mb-3">Role: Full-stack Developer</p>
+            <p class="text-gh-text text-[0.95rem] mb-5">
+              A web application for managing personal finances — accounts, income, expenses and transfers — with a modern frontend and Python FastAPI backend.
+            </p>
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-gh-muted mb-3 flex items-center gap-2">
+              <i class="fas fa-list-check text-gh-purple"></i> What I built
+            </h4>
+            <ul class="space-y-2 mb-5 text-[0.95rem]">
+              <li class="text-gh-text">Designed and implemented the dashboard, navigation and accounts section</li>
+              <li class="text-gh-text">Built interfaces for adding income, expenses and transfers</li>
+              <li class="text-gh-text">Structured the frontend with HTML, CSS and JavaScript</li>
+              <li class="text-gh-text">Architected the backend around FastAPI for API logic</li>
+              <li class="text-gh-text">Planned SQL Server integration for persistent financial data</li>
+            </ul>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">HTML</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">CSS</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">JavaScript</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">Python</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">FastAPI</span>
+              <span class="text-xs font-medium text-gh-muted bg-gh-bg px-2.5 py-1 rounded-md">SQL Server</span>
+            </div>
+          </div>
+          <div class="px-6 sm:px-8 py-4 border-t border-gh-border/50">
+            <a href="https://github.com/adivhahoM5/FinancialTracker" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-gh-purple hover:text-gh-purple-hover hover:gap-3 transition-all">
+              <i class="fab fa-github"></i> View repository
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-<button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-</button>
+    <!-- Skills -->
+    <section id="skills" class="max-w-5xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <h2 class="text-2xl sm:text-[1.85rem] font-bold text-gh-bright tracking-tight flex items-center gap-2.5 mb-8">
+        <i class="fas fa-gears text-gh-purple text-[0.9em]"></i> Skills
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div class="bg-gh-surface border border-gh-border/50 rounded-2xl p-5 hover:border-gh-border transition-colors">
+          <h3 class="text-sm font-semibold text-gh-muted mb-3 flex items-center gap-2">
+            <i class="fas fa-code text-gh-purple"></i> Languages
+          </h3>
+          <ul class="space-y-1.5 text-[0.95rem] font-medium">
+            <li>C#</li>
+            <li>Java</li>
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>C++</li>
+            <li>SQL</li>
+            <li>ASPX</li>
+          </ul>
+        </div>
+        <div class="bg-gh-surface border border-gh-border/50 rounded-2xl p-5 hover:border-gh-border transition-colors">
+          <h3 class="text-sm font-semibold text-gh-muted mb-3 flex items-center gap-2">
+            <i class="fas fa-server text-gh-purple"></i> Frameworks &amp; tools
+          </h3>
+          <ul class="space-y-1.5 text-[0.95rem] font-medium">
+            <li>ASP.NET Core</li>
+            <li>Entity Framework Core</li>
+            <li>FastAPI</li>
+            <li>SQL Server</li>
+            <li>Git</li>
+            <li>Swagger</li>
+            <li>Postman</li>
+          </ul>
+        </div>
+        <div class="bg-gh-surface border border-gh-border/50 rounded-2xl p-5 hover:border-gh-border transition-colors">
+          <h3 class="text-sm font-semibold text-gh-muted mb-3 flex items-center gap-2">
+            <i class="fas fa-database text-gh-purple"></i> Database
+          </h3>
+          <ul class="space-y-1.5 text-[0.95rem] font-medium">
+            <li>Microsoft SQL Server</li>
+            <li>Normalization</li>
+            <li>Entity-relational design</li>
+            <li>Oracle</li>
+          </ul>
+        </div>
+        <div class="bg-gh-surface border border-gh-border/50 rounded-2xl p-5 hover:border-gh-border transition-colors">
+          <h3 class="text-sm font-semibold text-gh-muted mb-3 flex items-center gap-2">
+            <i class="fas fa-laptop-code text-gh-purple"></i> Environment
+          </h3>
+          <ul class="space-y-1.5 text-[0.95rem] font-medium">
+            <li>Visual Studio</li>
+            <li>VS Code</li>
+            <li>PyCharm</li>
+            <li>Oracle SQL Developer</li>
+            <li>CodeBlocks</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-gh-muted mb-4 flex items-center gap-2">
+          <i class="fas fa-handshake text-gh-purple"></i> Working style
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm font-medium text-gh-text bg-gh-surface border border-gh-border/50 px-4 py-2 rounded-full hover:border-gh-purple hover:text-gh-purple transition-colors">Problem-solving</span>
+          <span class="text-sm font-medium text-gh-text bg-gh-surface border border-gh-border/50 px-4 py-2 rounded-full hover:border-gh-purple hover:text-gh-purple transition-colors">Attention to detail</span>
+          <span class="text-sm font-medium text-gh-text bg-gh-surface border border-gh-border/50 px-4 py-2 rounded-full hover:border-gh-purple hover:text-gh-purple transition-colors">Teamwork</span>
+          <span class="text-sm font-medium text-gh-text bg-gh-surface border border-gh-border/50 px-4 py-2 rounded-full hover:border-gh-purple hover:text-gh-purple transition-colors">Communication</span>
+          <span class="text-sm font-medium text-gh-text bg-gh-surface border border-gh-border/50 px-4 py-2 rounded-full hover:border-gh-purple hover:text-gh-purple transition-colors">Time management</span>
+          <span class="text-sm font-medium text-gh-text bg-gh-surface border border-gh-border/50 px-4 py-2 rounded-full hover:border-gh-purple hover:text-gh-purple transition-colors">Adaptability</span>
+          <span class="text-sm font-medium text-gh-text bg-gh-surface border border-gh-border/50 px-4 py-2 rounded-full hover:border-gh-purple hover:text-gh-purple transition-colors">Critical thinking</span>
+        </div>
+      </div>
+    </section>
 
-<script src="Script.js"></script>
+    <!-- Education -->
+    <section id="education" class="max-w-5xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <h2 class="text-2xl sm:text-[1.85rem] font-bold text-gh-bright tracking-tight flex items-center gap-2.5 mb-8">
+        <i class="fas fa-graduation-cap text-gh-purple text-[0.9em]"></i> Education
+      </h2>
+      <div class="bg-gh-surface border border-gh-border/50 rounded-2xl overflow-hidden">
+        <div class="flex flex-wrap justify-between gap-3 p-6 sm:p-8 border-b border-gh-border/50">
+          <div>
+            <h3 class="text-lg font-bold text-gh-bright mb-1">Bachelor of Science in Information Technology</h3>
+            <p class="text-gh-purple font-medium">North-West University</p>
+          </div>
+          <span class="font-mono text-xs text-gh-muted whitespace-nowrap">Expected November 2026</span>
+        </div>
+        <div class="p-6 sm:p-8 space-y-6">
+          <div>
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-gh-muted mb-3">Relevant coursework</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-sm font-medium text-gh-text bg-gh-bg px-3 py-1.5 rounded-md">Object-Oriented Programming</span>
+              <span class="text-sm font-medium text-gh-text bg-gh-bg px-3 py-1.5 rounded-md">System Analysis and Design</span>
+              <span class="text-sm font-medium text-gh-text bg-gh-bg px-3 py-1.5 rounded-md">Discrete Mathematics</span>
+              <span class="text-sm font-medium text-gh-text bg-gh-bg px-3 py-1.5 rounded-md">Data Structures and Algorithms</span>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xs font-semibold uppercase tracking-wider text-gh-muted mb-3">Academic foundation</h4>
+            <ul class="space-y-2 text-[0.95rem]">
+              <li class="text-gh-text">Software development principles</li>
+              <li class="text-gh-text">Project management</li>
+              <li class="text-gh-text">Database management systems</li>
+              <li class="text-gh-text">System analysis &amp; design</li>
+              <li class="text-gh-text">Network and communication technologies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership -->
+    <section id="leadership" class="max-w-5xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <h2 class="text-2xl sm:text-[1.85rem] font-bold text-gh-bright tracking-tight flex items-center gap-2.5 mb-8">
+        <i class="fas fa-briefcase text-gh-purple text-[0.9em]"></i> Leadership
+      </h2>
+      <div class="bg-gh-surface border border-gh-border/50 rounded-2xl overflow-hidden">
+        <div class="p-6 sm:p-8 border-b border-gh-border/50">
+          <h3 class="text-lg font-bold text-gh-bright mb-1">Student Assistant</h3>
+          <p class="text-gh-purple font-medium">North-West University · CMPG211 (Object-Oriented Programming)</p>
+        </div>
+        <div class="p-6 sm:p-8">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-gh-muted mb-3">Responsibilities</h4>
+          <ul class="space-y-2 text-[0.95rem]">
+            <li class="text-gh-text">Facilitated communication between students and the lecturer</li>
+            <li class="text-gh-text">Monitored discussion forums and LMS chat to assist with queries</li>
+            <li class="text-gh-text">Supported students through peer discussion, clarification and extra examples</li>
+            <li class="text-gh-text">Helped students build digital literacy and navigate the LMS effectively</li>
+            <li class="text-gh-text">Conducted live programming tutorials</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="max-w-5xl mx-auto px-5 sm:px-8 py-16 sm:py-20 pb-28">
+      <h2 class="text-2xl sm:text-[1.85rem] font-bold text-gh-bright tracking-tight flex items-center gap-2.5 mb-8">
+        <i class="fas fa-address-card text-gh-purple text-[0.9em]"></i> Contact
+      </h2>
+      <p class="text-lg font-medium text-gh-bright max-w-lg mb-10 leading-snug">
+        Open to full-time roles, internships, relocation anywhere, consulting, collaboration and mentoring. If you’re building something interesting, I’d like to hear from you.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-6 max-w-xl mb-10">
+        <div>
+          <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gh-muted mb-1.5">
+            <i class="fas fa-envelope text-gh-purple"></i> Email
+          </span>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="mailto:adivhahoM5@outlook.com" class="text-gh-bright font-medium hover:text-gh-purple transition-colors">adivhahoM5@outlook.com</a>
+            <button type="button" id="copyEmail" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gh-muted bg-gh-surface border border-gh-border px-2.5 py-1 rounded-md hover:text-gh-bright hover:border-gh-muted transition-all">
+              <i class="far fa-copy"></i> Copy
+            </button>
+          </div>
+          <span id="copyStatus" class="block text-xs text-gh-purple mt-1 min-h-[1.2em]" aria-live="polite"></span>
+        </div>
+        <div>
+          <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gh-muted mb-1.5">
+            <i class="fas fa-phone text-gh-purple"></i> Phone
+          </span>
+          <a href="tel:+27829313550" class="text-gh-bright font-medium hover:text-gh-purple transition-colors">+27 82 931 3550</a>
+        </div>
+        <div>
+          <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gh-muted mb-1.5">
+            <i class="fab fa-linkedin text-gh-purple"></i> LinkedIn
+          </span>
+          <a href="https://linkedin.com/in/adivhahom5" target="_blank" rel="noopener noreferrer" class="text-gh-bright font-medium hover:text-gh-purple transition-colors">linkedin.com/in/adivhahom5</a>
+        </div>
+        <div>
+          <span class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gh-muted mb-1.5">
+            <i class="fab fa-github text-gh-purple"></i> GitHub
+          </span>
+          <a href="https://github.com/adivhahoM5" target="_blank" rel="noopener noreferrer" class="text-gh-bright font-medium hover:text-gh-purple transition-colors">github.com/adivhahoM5</a>
+        </div>
+      </div>
+      <div class="bg-gh-surface border border-gh-border/50 rounded-2xl p-6 max-w-xl">
+        <h4 class="text-sm font-semibold text-gh-muted mb-3 flex items-center gap-2">
+          <i class="fas fa-handshake text-gh-purple"></i> Availability
+        </h4>
+        <ul class="space-y-2 text-sm">
+          <li class="text-gh-text">Open to new opportunities and challenges</li>
+          <li class="text-gh-text">Happy to relocate anywhere</li>
+          <li class="text-gh-text">Available for consulting and collaboration</li>
+          <li class="text-gh-text">Interested in mentoring and knowledge sharing</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-gh-border/50 py-6 px-5 sm:px-8">
+    <div class="max-w-5xl mx-auto flex justify-between items-center text-sm text-gh-muted">
+      <p>© 2026 Adivhaho Mulaudzi</p>
+      <div class="flex gap-4">
+        <a href="https://linkedin.com/in/adivhahom5" target="_blank" rel="noopener noreferrer" class="text-lg hover:text-gh-purple transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/adivhahoM5" target="_blank" rel="noopener noreferrer" class="text-lg hover:text-gh-purple transition-colors" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-gh-surface border border-gh-border text-gh-text flex items-center justify-center opacity-0 invisible translate-y-2 transition-all duration-300 z-50 shadow-lg hover:text-gh-purple hover:border-gh-purple" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="script.js"></script>
 </body>
-
 </html>

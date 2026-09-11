@@ -1,138 +1,156 @@
+(function () {
+  "use strict";
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const header = document.getElementById("header");
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const copyBtn = document.getElementById("copyEmail");
+  const copyStatus = document.getElementById("copyStatus");
+  const progressBar = document.getElementById("scrollProgressBar");
+  const backToTop = document.getElementById("backToTop");
+  const email = "adivhahoM5@outlook.com";
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// ---------- Mobile menu ---------
-function toggleMenu(){
-    document.querySelector("nav").classList.toggle("active");
-}
+  function onScroll() {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = docHeight > 0 ? Math.min(1, y / docHeight) : 0;
 
-document.querySelectorAll('nav [data-nav-link]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (window.innerWidth <= 768){
-            document.querySelector('nav').classList.remove('active');
-        }
-    });
-});
-
-// ---------- Scroll progress bar ----------
-const progressBar = document.getElementById('scrollProgressBar');
-
-function updateScrollProgress(){
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    if (progressBar) progressBar.style.width = pct + '%';
-}
-
-// ---------- Back to top ----------
-const backToTopBtn = document.getElementById('backToTop');
-
-function updateBackToTop(){
-    if (window.scrollY > 480){
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
+    if (header) {
+      if (y > 20) header.classList.add("header-scrolled");
+      else header.classList.remove("header-scrolled");
     }
-}
 
-if (backToTopBtn){
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    if (progressBar) {
+      progressBar.style.width = (progress * 100).toFixed(2) + "%";
+    }
+
+    if (backToTop) {
+      if (y > 400) backToTop.classList.add("btt-visible");
+      else backToTop.classList.remove("btt-visible");
+    }
+  }
+
+  function toggleMenu() {
+    const open = menuToggle.getAttribute("aria-expanded") === "true";
+    menuToggle.setAttribute("aria-expanded", String(!open));
+    if (open) {
+      mobileMenu.hidden = true;
+      mobileMenu.classList.add("hidden");
+      document.body.style.overflow = "";
+    } else {
+      mobileMenu.hidden = false;
+      mobileMenu.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeMenu() {
+    menuToggle.setAttribute("aria-expanded", "false");
+    mobileMenu.hidden = true;
+    mobileMenu.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  function setupReveals() {
+    const targets = document.querySelectorAll(
+      "section > h2, section > .grid, section > .space-y-5, section > .space-y-4, article, .bg-gh-surface"
+    );
+    targets.forEach(function (el, i) {
+      if (!el.classList.contains("reveal")) {
+        el.classList.add("reveal");
+        if (i < 5) el.classList.add("d" + Math.min(i, 4));
+      }
     });
-}
 
-window.addEventListener('scroll', () => {
-    updateScrollProgress();
-    updateBackToTop();
-}, { passive: true });
+    if (reducedMotion) {
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        el.classList.add("visible");
+      });
+      return;
+    }
 
-updateScrollProgress();
-updateBackToTop();
-
-// ---------- Reveal on scroll ----------
-const revealEls = document.querySelectorAll('.reveal');
-
-if ('IntersectionObserver' in window && !prefersReducedMotion){
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting){
-                entry.target.classList.add('is-visible');
-                revealObserver.unobserve(entry.target);
-            }
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
         });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      },
+      { rootMargin: "0px 0px -5% 0px", threshold: 0.05 }
+    );
 
-    revealEls.forEach(el => revealObserver.observe(el));
-} else {
-    revealEls.forEach(el => el.classList.add('is-visible'));
-}
-
-// ---------- Active nav link highlighting ----------
-const sections = document.querySelectorAll('main section');
-const navButtons = document.querySelectorAll('nav [data-nav-link]');
-
-function setActiveLink(hash){
-    navButtons.forEach(btn => {
-        const target = btn.getAttribute('onclick') || '';
-        btn.classList.toggle('active-link', target.includes(hash));
+    document.querySelectorAll(".reveal").forEach(function (el) {
+      observer.observe(el);
     });
-}
+  }
 
-if ('IntersectionObserver' in window){
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting){
-                setActiveLink('#' + entry.target.id);
-            }
-        });
-    }, { threshold: 0.4 });
-
-    sections.forEach(sec => navObserver.observe(sec));
-}
-
-// ---------- Role text (static, no typing/erasing) ----------
-const typedRoleEl = document.getElementById('typedRole');
-
-if (typedRoleEl){
-    typedRoleEl.textContent = 'Aspiring Software Developer';
-}
-
-// ---------- Terminal API console (static, fixed content) ----------
-const terminalBody = document.getElementById('terminalBody');
-
-if (terminalBody){
-    terminalBody.innerHTML =
-        '<span class="req">GET</span> /api/contacts\n' +
-        '<span class="muted">Status: 200 OK</span>\n' +
-        '{\n' +
-        '  <span class="key">"id"</span>: <span class="num">1</span>,\n' +
-        '  <span class="key">"name"</span>: <span class="str">"Adivhaho Mulaudzi"</span>,\n' +
-        '  <span class="key">"role"</span>: <span class="str">"Software Developer"</span>,\n' +
-        '  <span class="key">"skills"</span>: [<span class="str">"C#"</span>, <span class="str">"ASP.NET Core"</span>, <span class="str">"SQL"</span>]\n' +
-        '}';
-}
-
-// ---------- Copy email ----------
-const copyEmailBtn = document.getElementById('copyEmailBtn');
-
-if (copyEmailBtn){
-    copyEmailBtn.addEventListener('click', async () => {
-        const email = 'adivhahoM5@outlook.com';
-        try {
-            await navigator.clipboard.writeText(email);
-        } catch (err) {
-            const temp = document.createElement('textarea');
-            temp.value = email;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-        }
-        copyEmailBtn.classList.add('copied');
-        copyEmailBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
-        setTimeout(() => {
-            copyEmailBtn.classList.remove('copied');
-            copyEmailBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
-        }, 1800);
+  function setupCopy() {
+    if (!copyBtn) return;
+    copyBtn.addEventListener("click", function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
     });
-}
+  }
+
+  function showCopied() {
+    copyBtn.classList.add("copy-copied");
+    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
+    if (copyStatus) copyStatus.textContent = "Email address copied.";
+    setTimeout(function () {
+      copyBtn.classList.remove("copy-copied");
+      copyBtn.innerHTML = '<i class="far fa-copy"></i> Copy';
+      if (copyStatus) copyStatus.textContent = "";
+    }, 2000);
+  }
+
+  function fallbackCopy() {
+    const ta = document.createElement("textarea");
+    ta.value = email;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "absolute";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      showCopied();
+    } catch (e) {
+      if (copyStatus) copyStatus.textContent = "Select and copy manually.";
+    }
+    document.body.removeChild(ta);
+  }
+
+  function init() {
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    if (menuToggle) menuToggle.addEventListener("click", toggleMenu);
+
+    if (mobileMenu) {
+      mobileMenu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+    }
+
+    if (backToTop) {
+      backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+      });
+    }
+
+    setupReveals();
+    setupCopy();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
