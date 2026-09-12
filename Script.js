@@ -200,7 +200,7 @@
     document.body.removeChild(ta);
   }
 
-  /* ---------- Init ---------- */
+  /* ---------- Init --------- */
   function init() {
     runSplash();
     onScroll();
