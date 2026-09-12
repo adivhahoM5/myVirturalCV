@@ -13,18 +13,68 @@
   background: rgba(13, 17, 23, 0.94) !important;
 }
 
-/* Mobile menu toggle animation */
+/* Hamburger → X */
+#menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  width: 28px;
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  z-index: 120;
+}
+
+@media (max-width: 767px) {
+  #menuToggle {
+    display: block;
+  }
+}
+
+#menuToggle span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #F0F6FC;
+  border-radius: 1px;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              top 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              bottom 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.2s;
+}
+
+#menuToggle span:first-child {
+  top: 4px;
+}
+
+#menuToggle span:last-child {
+  bottom: 4px;
+}
+
 #menuToggle[aria-expanded="true"] span:first-child {
   top: 9px;
   transform: rotate(45deg);
 }
+
 #menuToggle[aria-expanded="true"] span:last-child {
   bottom: 9px;
   transform: rotate(-45deg);
 }
 
-#menuToggle span {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s, top 0.25s, bottom 0.25s;
+/* Mobile menu panel */
+#mobileMenu {
+  position: fixed;
+  inset: 4.25rem 0 0 0;
+  background: #0D1117;
+  z-index: 90;
+  padding: 2.5rem 1.25rem;
+}
+
+#mobileMenu.hidden,
+#mobileMenu[hidden] {
+  display: none !important;
 }
 
 /* Copy button active */
@@ -69,5 +119,8 @@ button:focus-visible {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  #spaceSplash {
+    transition: none !important;
   }
 }
